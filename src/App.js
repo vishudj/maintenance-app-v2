@@ -15,11 +15,11 @@ function App() {
   }, []);
 
   const handleLogin = () => {
-    if (pin === '1991') {
+    if (pin === '1982') {
       sessionStorage.setItem('role', 'admin');
       setRole('admin');
       setError('');
-    } else if (pin === '2025') {
+    } else if (pin === '2026') {
       sessionStorage.setItem('role', 'worker');
       setRole('worker');
       setError('');
