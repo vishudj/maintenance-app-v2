@@ -200,6 +200,10 @@ export default function WorkerPanel({ onLogout }) {
     setTimeout(() => setSuggestSuccess(false), 4000);
   };
 
+  const taskTitle = (task) => (lang === 'es' && task.title_es) ? task.title_es : task.title;
+  const taskDesc = (task) => (lang === 'es' && task.description_es) ? task.description_es : task.description;
+  const taskNotes = (task) => (lang === 'es' && task.task_notes_es) ? task.task_notes_es : task.task_notes;
+
   const todayTasksByCategory = (cat) =>
     tasks.filter(task => task.is_active && shouldShowToday(task) && task.category === cat);
 
@@ -237,7 +241,7 @@ export default function WorkerPanel({ onLogout }) {
               {missedTasks.map(task => (
                 <div key={task.id} className="worker-task-card missed-card">
                   <div className="worker-task-header">
-                    <span className="worker-task-title">{task.title}</span>
+                    <span className="worker-task-title">{taskTitle(task)}</span>
                     <span className="badge badge-red">MISSED</span>
                   </div>
                   <div className="worker-task-meta">{task.category} · {task.recurrence}</div>
@@ -272,7 +276,7 @@ export default function WorkerPanel({ onLogout }) {
           return (
             <div key={task.id} className={`worker-task-card${isDone ? ' done-card' : ''}`}>
               <div className="worker-task-header">
-                <span className="worker-task-title">{task.title}</span>
+                <span className="worker-task-title">{taskTitle(task)}</span>
                 <div style={{ display: 'flex', gap: '4px', flexShrink: 0 }}>
                   {task.due_by !== 'anytime' && (
                     <span className="badge badge-blue">{t.dueBy} {task.due_by}</span>
@@ -281,13 +285,13 @@ export default function WorkerPanel({ onLogout }) {
                 </div>
               </div>
 
-              {task.description && (
-                <div className="worker-task-meta">{task.description}</div>
+              {taskDesc(task) && (
+                <div className="worker-task-meta">{taskDesc(task)}</div>
               )}
 
-              {task.task_notes && !isDone && (
+              {taskNotes(task) && !isDone && (
                 <div className="worker-task-notes-admin">
-                  {t.adminNotes} {task.task_notes}
+                  {t.adminNotes} {taskNotes(task)}
                 </div>
               )}
 

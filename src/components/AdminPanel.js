@@ -46,6 +46,7 @@ const EMPTY_TASK = {
   title: '', description: '', category: 'bar', season: 'all',
   recurrence: 'daily', pic_required: false, is_active: true,
   due_by: 'anytime', task_notes: '', reference_photo_url: '',
+  title_es: '', description_es: '', task_notes_es: '',
 };
 
 export default function AdminPanel({ onLogout }) {
@@ -356,6 +357,21 @@ export default function AdminPanel({ onLogout }) {
                   <label>Task Notes (shown to worker)</label>
                   <textarea rows={2} value={newTask.task_notes} onChange={e => setNewTask(p => ({ ...p, task_notes: e.target.value }))} placeholder="Notes visible to worker on their card" />
                 </div>
+                <div style={{ borderTop: '1px dashed #e0e0e0', margin: '10px 0 10px', paddingTop: '10px' }}>
+                  <div style={{ fontSize: '0.8rem', fontWeight: '700', color: '#888', marginBottom: '8px' }}>🌐 Spanish Translation (optional — shown to worker when ES is selected)</div>
+                  <div className="form-group" style={{ marginBottom: '8px' }}>
+                    <label>Title (ES)</label>
+                    <input value={newTask.title_es} onChange={e => setNewTask(p => ({ ...p, title_es: e.target.value }))} placeholder="Título en español" />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: '8px' }}>
+                    <label>Description (ES)</label>
+                    <textarea rows={2} value={newTask.description_es} onChange={e => setNewTask(p => ({ ...p, description_es: e.target.value }))} placeholder="Descripción en español" />
+                  </div>
+                  <div className="form-group" style={{ marginBottom: '8px' }}>
+                    <label>Task Notes (ES)</label>
+                    <textarea rows={2} value={newTask.task_notes_es} onChange={e => setNewTask(p => ({ ...p, task_notes_es: e.target.value }))} placeholder="Notas en español" />
+                  </div>
+                </div>
                 <div className="form-group" style={{ marginBottom: '8px' }}>
                   <label>Reference Photo (optional)</label>
                   <input type="file" accept="image/*" onChange={e => setNewTaskRefFile(e.target.files[0] || null)} />
@@ -516,6 +532,21 @@ function TaskModal({ task, onChange, refFile, onRefFile, onSave, onClose, saving
         <div className="form-group" style={{ marginBottom: '8px' }}>
           <label>Task Notes (shown to worker)</label>
           <textarea rows={2} value={task.task_notes || ''} onChange={e => onChange(p => ({ ...p, task_notes: e.target.value }))} />
+        </div>
+        <div style={{ borderTop: '1px dashed #e0e0e0', margin: '10px 0 10px', paddingTop: '10px' }}>
+          <div style={{ fontSize: '0.8rem', fontWeight: '700', color: '#888', marginBottom: '8px' }}>🌐 Spanish Translation (optional)</div>
+          <div className="form-group" style={{ marginBottom: '8px' }}>
+            <label>Title (ES)</label>
+            <input value={task.title_es || ''} onChange={e => onChange(p => ({ ...p, title_es: e.target.value }))} placeholder="Título en español" />
+          </div>
+          <div className="form-group" style={{ marginBottom: '8px' }}>
+            <label>Description (ES)</label>
+            <textarea rows={2} value={task.description_es || ''} onChange={e => onChange(p => ({ ...p, description_es: e.target.value }))} placeholder="Descripción en español" />
+          </div>
+          <div className="form-group" style={{ marginBottom: '8px' }}>
+            <label>Task Notes (ES)</label>
+            <textarea rows={2} value={task.task_notes_es || ''} onChange={e => onChange(p => ({ ...p, task_notes_es: e.target.value }))} placeholder="Notas en español" />
+          </div>
         </div>
         <div className="form-group" style={{ marginBottom: '8px' }}>
           <label>Reference Photo (optional)</label>
